@@ -33,20 +33,26 @@ if ($result->num_rows > 0) {
             <div class="row no-gutters">
                 <!-- Company Picture Column -->
                 <div class="col-md-2 d-flex align-items-center justify-content-center">
-                    <img style="width: 35%;" src="' . $row["company_picture"] . '" class="card-img" alt="Company Image">
+                    <img style="width: 35%;" src="' . $row["company_picture"] . '" class="card-img" alt="' . $row["company_name"] . '">
                 </div>
                 <!-- Job Details Column -->
                 <div class="col-md-10">
                     <div class="card-body row">
                         <!-- Left Column for Job Details -->
                         <div class="col-md-7">
-                            <h5 class="card-title">' . $row["job_name"] . '</h5>
+                            <h5 class="card-title">' . $row["job_name"] . '<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-primary') . '">' . $row["full_time"] . '</span></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
                             <!-- Part Time or Full Time Badge -->
-                            <p class="card-text">Salary: ' . $row["salary"] . '</p>
+                            <p class="card-text">' . $row["salary"] . $row["jobType"] . '</p>
+                            <p class="card-text">' . $row["brief_info"] . '</p>
                         </div>
                         <!-- Center Column for Apply Button -->
                         <div class="d-flex justify-content-between align-items-center col-md-2">
                             <button type="button" class="btn btn-primary">Apply</button>
+                        </div>
+                        <!-- Right Column for Posted Time -->
+                        <div class="d-flex justify-content-between align-items-center col-md-3">
+                            <small class="text-muted">Posted ' . $row["posted_time"] . ' ago</small>
                         </div>
                     </div>
                 </div>

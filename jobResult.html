@@ -22,7 +22,7 @@
     <header>
       <!-- logo -->
       <div id="logo">
-        <img src="images/job3.png" alt="JOBPORTAL Logo">
+        <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">JobP <span style="font-size:30px; color: rgb(29, 129, 236);">..</span></h6>
       </div>
   
       <!-- navbar -->
@@ -36,6 +36,7 @@
       <div>
         <a href="test.html" class="btn btn-primary">Post Job</a>
       </div>
+  
     </header>
 
   <div class="container mt-4 cont1 p-lg-5 custom-box">
@@ -64,7 +65,13 @@
   </div>
 
 
-
+  <div id="scrollToTop">&#8593;</div>
+  <script>
+    // JavaScript to handle the scrolling functionality
+    document.getElementById('scrollToTop').addEventListener('click', function() {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    });
+  </script>
 
 </body>
 </html>
