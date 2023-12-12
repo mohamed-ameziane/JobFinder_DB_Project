@@ -29,7 +29,11 @@ if (isset($_GET['keywords'])) {
     $keyword = $_GET['keywords'];
 }
 
-// Fetch jobs based on the selected filter and keyword
+// Set default salary range
+$minSalary = isset($_GET['min_salary']) ? $_GET['min_salary'] : 0;
+$maxSalary = isset($_GET['max_salary']) ? $_GET['max_salary'] : PHP_INT_MAX;
+
+// Fetch jobs based on the selected filter, keyword, and salary range
 $sql = "";
 
 switch ($filter) {
@@ -38,6 +42,7 @@ switch ($filter) {
                 FROM jobs_table j, company c
                 WHERE j.id_company = c.id_company
                 AND j.job_name LIKE '%$keyword%'
+                AND j.salary BETWEEN $minSalary AND $maxSalary
                 ORDER BY j.salary DESC";
         break;
     case "full_time":
@@ -45,14 +50,16 @@ switch ($filter) {
                 FROM jobs_table j, company c
                 WHERE j.id_company = c.id_company
                 AND j.job_name LIKE '%$keyword%'
-                AND j.full_time = 'Full Time'";
+                AND j.full_time = 'Full Time'
+                AND j.salary BETWEEN $minSalary AND $maxSalary";
         break;
     case "part_time":
         $sql = "SELECT j.*, c.company_name, c.company_picture 
                 FROM jobs_table j, company c
                 WHERE j.id_company = c.id_company
                 AND j.job_name LIKE '%$keyword%'
-                AND j.full_time = 'Part Time'";
+                AND j.full_time = 'Part Time'
+                AND j.salary BETWEEN $minSalary AND $maxSalary";
         break;
     case "new":
     default:
@@ -60,6 +67,7 @@ switch ($filter) {
                 FROM jobs_table j, company c
                 WHERE j.id_company = c.id_company
                 AND j.job_name LIKE '%$keyword%'
+                AND j.salary BETWEEN $minSalary AND $maxSalary
                 ORDER BY j.posted_time DESC";
         break;
 }
