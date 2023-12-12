@@ -89,7 +89,7 @@ if ($result->num_rows > 0) {
                     <div class="card-body row">
                         <!-- Left Column for Job Details -->
                         <div class="col-md-7">
-                            <h5 class="card-title">' . $row["job_name"] . '<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-primary') . '">' . $row["full_time"] . '</span></h5>
+                            <h5 class="card-title">' . $row["job_name"] . '<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
                             <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
                             <!-- Part Time or Full Time Badge -->
                             <p class="card-text">' . $row["salary"] . $row["jobType"] . '</p>
