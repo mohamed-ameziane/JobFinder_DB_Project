@@ -44,7 +44,6 @@ if ($result->num_rows > 0) {
                             <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
                             <!-- Part Time or Full Time Badge -->
                             <p class="card-text">' . $row["salary"] . $row["jobType"] . '</p>
-                            <p class="card-text">' . $row["brief_info"] . '</p>
                         </div>
                         <!-- Center Column for Apply Button -->
                         <div class="d-flex justify-content-between align-items-center col-md-2">

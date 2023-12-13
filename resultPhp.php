@@ -21,19 +21,20 @@ if (isset($_GET['filter'])) {
     $filter = $_GET['filter'];
 }
 
-// Set default keyword
-$keyword = "";
+// Set default keywords
+$keywords = [];
 
-// Change keyword based on user input
+// Change keywords based on user input
 if (isset($_GET['keywords'])) {
-    $keyword = $_GET['keywords'];
+    // Split the input string into an array of keywords
+    $keywords = preg_split("/[\s,;]+/", $_GET['keywords']);
 }
 
 // Set default salary range
 $minSalary = isset($_GET['min_salary']) ? $_GET['min_salary'] : 0;
 $maxSalary = isset($_GET['max_salary']) ? $_GET['max_salary'] : PHP_INT_MAX;
 
-// Fetch jobs based on the selected filter, keyword, and salary range
+// Fetch jobs based on the selected filter, keywords, and salary range
 $sql = "";
 
 switch ($filter) {
@@ -41,33 +42,33 @@ switch ($filter) {
         $sql = "SELECT j.*, c.company_name, c.company_picture 
                 FROM jobs_table j, company c
                 WHERE j.id_company = c.id_company
-                AND j.job_name LIKE '%$keyword%'
                 AND j.salary BETWEEN $minSalary AND $maxSalary
+                " . buildKeywordFilter($keywords) . "
                 ORDER BY j.salary DESC";
         break;
     case "full_time":
         $sql = "SELECT j.*, c.company_name, c.company_picture 
                 FROM jobs_table j, company c
                 WHERE j.id_company = c.id_company
-                AND j.job_name LIKE '%$keyword%'
                 AND j.full_time = 'Full Time'
-                AND j.salary BETWEEN $minSalary AND $maxSalary";
+                AND j.salary BETWEEN $minSalary AND $maxSalary
+                " . buildKeywordFilter($keywords);
         break;
     case "part_time":
         $sql = "SELECT j.*, c.company_name, c.company_picture 
                 FROM jobs_table j, company c
                 WHERE j.id_company = c.id_company
-                AND j.job_name LIKE '%$keyword%'
                 AND j.full_time = 'Part Time'
-                AND j.salary BETWEEN $minSalary AND $maxSalary";
+                AND j.salary BETWEEN $minSalary AND $maxSalary
+                " . buildKeywordFilter($keywords);
         break;
     case "new":
     default:
         $sql = "SELECT j.*, c.company_name, c.company_picture 
                 FROM jobs_table j, company c
                 WHERE j.id_company = c.id_company
-                AND j.job_name LIKE '%$keyword%'
                 AND j.salary BETWEEN $minSalary AND $maxSalary
+                " . buildKeywordFilter($keywords) . "
                 ORDER BY j.posted_time DESC";
         break;
 }
@@ -93,7 +94,6 @@ if ($result->num_rows > 0) {
                             <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
                             <!-- Part Time or Full Time Badge -->
                             <p class="card-text">' . $row["salary"] . $row["jobType"] . '</p>
-                            <p class="card-text">' . $row["brief_info"] . '</p>
                         </div>
                         <!-- Center Column for Apply Button -->
                         <div class="d-flex justify-content-between align-items-center col-md-2">
@@ -115,4 +115,23 @@ if ($result->num_rows > 0) {
 
 // Close the database connection
 $conn->close();
+
+/**
+ * Helper function to build the keyword filter for SQL query
+ *
+ * @param array $keywords
+ * @return string
+ */
+function buildKeywordFilter($keywords) {
+    if (empty($keywords)) {
+        return ""; // Return an empty string if no keywords are provided
+    }
+
+    $keywordConditions = [];
+    foreach ($keywords as $keyword) {
+        $keywordConditions[] = "j.job_name LIKE '%$keyword%'";
+    }
+
+    return " AND (" . implode(" OR ", $keywordConditions) . ")";
+}
 ?>
