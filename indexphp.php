@@ -1,10 +1,9 @@
 <?php
-
 // Database credentials
 $servername = "localhost";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_database";
+$username = "root";
+$password = "";
+$dbname = "p1";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -15,11 +14,11 @@ if ($conn->connect_error) {
 }
 
 // Fetch the latest 5 jobs with company details
-$sql = "SELECT jobs_table.job_name, jobs_table.salary, company.company_picture
+$sql = "SELECT jobs_table.job_id, jobs_table.job_name, jobs_table.full_time, jobs_table.salary, jobs_table.posted_time, company.company_name, company.company_picture
         FROM jobs_table
         INNER JOIN company ON jobs_table.id_company = company.id_company
         ORDER BY jobs_table.posted_time DESC
-        LIMIT 5";
+        LIMIT 3";
 
 // Execute the query
 $result = $conn->query($sql);
@@ -27,6 +26,27 @@ $result = $conn->query($sql);
 // Check if there are results
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
+        // Calculate the time difference
+        $postedTime = new DateTime($row["posted_time"]);
+        $currentDateTime = new DateTime();
+        $timeDifference = $currentDateTime->diff($postedTime);
+
+        // Format the elapsed time
+        $elapsedTime = '';
+        if ($timeDifference->y > 0) {
+            $elapsedTime = $timeDifference->format('%y years ago');
+        } elseif ($timeDifference->m > 0) {
+            $elapsedTime = $timeDifference->format('%m months ago');
+        } elseif ($timeDifference->d > 0) {
+            $elapsedTime = $timeDifference->format('%d days ago');
+        } elseif ($timeDifference->h > 0) {
+            $elapsedTime = $timeDifference->format('%h hours ago');
+        } elseif ($timeDifference->i > 0) {
+            $elapsedTime = $timeDifference->format('%i minutes ago');
+        } else {
+            $elapsedTime = 'Just now';
+        }
+
         // Output the job details as a Bootstrap card
         echo '
         <a href="jobInformation.html?id=' . $row["job_id"] . '" class="card m-md-5 p-1 job-card">
@@ -43,7 +63,7 @@ if ($result->num_rows > 0) {
                             <h5 class="card-title">' . $row["job_name"] . '<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
                             <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
                             <!-- Part Time or Full Time Badge -->
-                            <p class="card-text">' . $row["salary"] . $row["jobType"] . '</p>
+                            <p class="card-text">' . $row["salary"] . '</p>
                         </div>
                         <!-- Center Column for Apply Button -->
                         <div class="d-flex justify-content-between align-items-center col-md-2">
@@ -51,12 +71,11 @@ if ($result->num_rows > 0) {
                         </div>
                         <!-- Right Column for Posted Time -->
                         <div class="d-flex justify-content-between align-items-center col-md-3">
-                            <small class="text-muted">Posted ' . $row["posted_time"] . ' ago</small>
+                            <small class="text-muted">Posted ' . $elapsedTime . '</small>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </a>';
     }
 } else {
