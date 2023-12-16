@@ -45,31 +45,32 @@ if (!empty($keywords)) {
     $sql .= " AND (" . implode(" OR ", $keywordConditions) . ")";
 }
 
-// Apply additional filters
+$orderBy = " ORDER BY j.posted_time DESC";
+
 if (isset($_GET['filter'])) {
     switch ($_GET['filter']) {
         case "high_salary":
-            $sql .= " ORDER BY j.salary DESC";
+            $orderBy = " ORDER BY j.salary DESC";
             break;
         case "full_time":
-            $sql .= " AND j.full_time = 'Full Time'";
+            $sql .= (strpos($sql, 'WHERE') !== false ? " AND " : " WHERE") . " j.full_time = 'Full Time'";
             break;
         case "part_time":
-            $sql .= " AND j.full_time = 'Part Time'";
+            $sql .= (strpos($sql, 'WHERE') !== false ? " AND " : " WHERE") . " j.full_time = 'Part Time'";
             break;
         case "hybrid":
-            $sql .= " AND j.jobType = 'Hybrid'";
+            $sql .= (strpos($sql, 'WHERE') !== false ? " AND " : " WHERE") . " j.jobType = 'Hybrid'";
             break;
         case "remote":
-            $sql .= " AND j.jobType = 'Remote'";
+            $sql .= (strpos($sql, 'WHERE') !== false ? " AND " : " WHERE") . " j.jobType = 'Remote'";
             break;
         case "on_site":
-            $sql .= " AND j.jobType = 'On Site'";
+            $sql .= (strpos($sql, 'WHERE') !== false ? " AND " : " WHERE") . " j.jobType = 'On Site'";
             break;
     }
 }
 
-$sql .= " ORDER BY j.posted_time DESC";
+$sql .= $orderBy;
 
 $result = $conn->query($sql);
 
@@ -145,7 +146,9 @@ function buildKeywordFilter($keywords) {
     $keywordConditions = [];
 
     foreach ($keywords as $keyword) {
-        $keywordConditions[] = "j.job_name LIKE '%$keyword%'";
+        $keywordConditions[] = "j.job_name LIKE '%$keyword%'
+                               OR j.job_description LIKE '%$keyword%'
+                               OR c.company_name LIKE '%$keyword%'";
     }
 
     // Check if any keyword conditions are generated
