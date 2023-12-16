@@ -1,17 +1,5 @@
 <?php
-// Database credentials
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "jobfinder";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include("dbConnect.php");
 
 // Fetch the latest 20 jobs with company details, including jobType
 $sql = "SELECT jobs_table.job_id, jobs_table.job_name, jobs_table.full_time, jobs_table.salary, jobs_table.posted_time, jobs_table.jobType, company.company_name, company.company_picture

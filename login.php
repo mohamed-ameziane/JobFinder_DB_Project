@@ -13,15 +13,16 @@
         }
 
         // Prepare and execute the SQL query
-        $sql = "SELECT * FROM TABLE WHERE EMAIL = '$email' AND PASS = '$password' ";
+        $sql = "SELECT * FROM company WHERE contact_email = '$email' AND password = '$password' ";
         $resultat = $conn->query($sql)->fetch_array();
-        if ($result->num_rows > 0) {
+        if ($conn->query($sql)->num_rows > 0) {
             $x = $resultat[0];
             setcookie("companyData", $x, time() + 3600, "/");
             header("Location: index.html");
             exit();
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
+            // header("Location: login.html");
         }
     }
 ?>
