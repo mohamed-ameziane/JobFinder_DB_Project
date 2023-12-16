@@ -15,21 +15,21 @@
     <header>
         <!-- logo -->
         <div id="logo">
-          <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">JobP <span style="font-size:30px; color: rgb(29, 129, 236);">..</span></h6>
+            <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">JobP <span style="font-size:30px; color: rgb(29, 129, 236);">..</span></h6>
         </div>
         <!-- navbar -->
         <nav>
-          <a class="navb" href="index.html">Home</a>
-          <a class="navb" href="about.html">About</a>
-          <a class="navb" href="contactus.html">Contact Us</a>
+            <a class="navb" href="index.html">Home</a>
+            <a class="navb" href="about.html">About</a>
+            <a class="navb" href="contactus.html">Contact Us</a>
         </nav>
         <!-- navbar buttons -->
         <div>
-          <a href="test.html" class="btn btn-primary">Log in</a>
-          <a href="test.html" class="btn btn-outline-danger">Sign up</a>
+            <a href="test.html" class="btn btn-primary">Log in</a>
+            <a href="test.html" class="btn btn-outline-danger">Sign up</a>
         </div>
     </header>
-
+    
     
     <section class="main content" style="padding-left: 10%; padding-right: 10%;"x>
         <!-- job title, apply, and company description -->
@@ -44,6 +44,7 @@
                 <!-- job title & apply btn -->
                 <div class="col-sm-8">
                     <div class="header-container">
+                        <?php include("dbConnect.php"); ?>
                         <p class="h1 card-title mb-4">Data Science Manager</p>
                         <p class="card-text"><strong>Location : </strong> Agoda &middot; Marrakesh, Marrakesh-Safi, Morocco</p>
                         <p class="card-text"><strong>Posted Date : </strong> Reposted 1 week ago &middot; 114 applicants</p>
