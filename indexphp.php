@@ -63,7 +63,7 @@ if ($result->num_rows > 0) {
                             <h5 class="card-title">' . $row["job_name"] . '<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
                             <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
                             <!-- Part Time or Full Time Badge -->
-                            <p class="card-text">' . $row["salary"] . '</p>
+                            <p class="card-text">' . $row["salary"] . ' MAD</p>
                         </div>
                         <!-- Center Column for Apply Button -->
                         <div class="d-flex justify-content-between align-items-center col-md-2">

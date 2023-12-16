@@ -21,13 +21,20 @@ $keywords = isset($_GET['keywords']) ? preg_split("/[\s,;]+/", $_GET['keywords']
 $minSalary = isset($_GET['min_salary']) ? $_GET['min_salary'] : 0;
 $maxSalary = isset($_GET['max_salary']) ? $_GET['max_salary'] : PHP_INT_MAX;
 
+// Check if either min or max salary is null, then fetch from the database
+if ($minSalary == "") {
+    $minSalary = $conn->query("SELECT MIN(salary) FROM jobs_table")->fetch_array()[0];
+}
+if ($maxSalary == "") {
+    $maxSalary = $conn->query("SELECT MAX(salary) FROM jobs_table")->fetch_array()[0];
+}
 $sql = "";
-$orderBy = " ORDER BY j.posted_time DESC"; // Default order
+$orderBy = " ORDER BY j.posted_time DESC";
 
 $commonQuery = "SELECT j.*, c.company_name, c.company_picture 
                FROM jobs_table j
                INNER JOIN company c ON j.id_company = c.id_company
-               WHERE j.salary BETWEEN $minSalary AND $maxSalary";
+               WHERE j.salary BETWEEN $minSalary AND $maxSalary ";
 
 if (isset($_GET['filter'])) {
     switch ($_GET['filter']) {
@@ -35,12 +42,12 @@ if (isset($_GET['filter'])) {
             $orderBy = " ORDER BY j.salary DESC";
             break;
         case "full_time":
-            $commonQuery .= (strpos($commonQuery, 'WHERE') !== false ? " AND" : " WHERE") . " j.full_time = 'Full Time'";
+            $commonQuery .= (strpos($commonQuery, 'WHERE') !== false ? " AND " : " WHERE") . " j.full_time = 'Full Time'";
             break;
         case "part_time":
-            $commonQuery .= (strpos($commonQuery, 'WHERE') !== false ? " AND" : " WHERE") . " j.full_time = 'Part Time'";
+            $commonQuery .= (strpos($commonQuery, 'WHERE') !== false ? " AND " : " WHERE") . " j.full_time = 'Part Time'";
             break;
-        // Add additional cases as needed
+
     }
 }
 
@@ -88,7 +95,7 @@ if ($result->num_rows > 0) {
                             <h5 class="card-title">' . $row["job_name"] . '<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
                             <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
                             <!-- Part Time or Full Time Badge -->
-                            <p class="card-text">' . $row["salary"] . '</p>
+                            <p class="card-text">' . $row["salary"] . ' MAD</p>
                         </div>
                         <!-- Center Column for Apply Button -->
                         <div class="d-flex justify-content-between align-items-center col-md-2">
