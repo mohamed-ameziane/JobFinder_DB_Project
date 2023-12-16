@@ -25,7 +25,9 @@
     <!-- logo -->
     <a href="index.html" style="text-decoration: none;">
       <div id="logo">
-        <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">JobP <span style="font-size:30px; color: rgb(29, 129, 236);">..</span></h6>
+        <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">
+          JobFinder <span style="font-size:30px; color: rgb(29, 129, 236);">...</span>
+        </h6>
       </div>
     </a>
 
@@ -51,30 +53,35 @@
       <h2 class="mb-4">Job Listings</h2>
   
       <!-- Filter Form -->
-      <form action="jobResult.html" method="get">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-md-3 mb-3">
-                <label for="filter" class="form-label">Filter:</label>
-                <select id="filter" class="form-select" name="filter">
-                    <option value="new">New Posted Jobs</option>
-                    <option value="high_salary">High Salary to Low Salary</option>
-                    <option value="full_time">Full Time Jobs</option>
-                    <option value="part_time">Part Time Jobs</option>
-                </select>
-            </div>
-            <div class="col-md-2 mb-3">
-                <label for="min_salary" class="form-label">Min Salary:</label>
-                <input type="number" class="form-control" id="min_salary" name="min_salary" placeholder="Min Salary">
-            </div>
-            <div class="col-md-2 mb-3">
-                <label for="max_salary" class="form-label">Max Salary:</label>
-                <input type="number" class="form-control" id="max_salary" name="max_salary" placeholder="Max Salary">
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary mt-2">Apply Filter</button>
-            </div>
-        </div>
-      </form>
+      <!-- Filter Form -->
+<form action="jobResult.html" method="get">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-md-3 mb-3">
+          <label for="filter" class="form-label">Filter:</label>
+          <select id="filter" class="form-select" name="filter">
+              <option value="new">New Posted Jobs</option>
+              <option value="high_salary">High Salary to Low Salary</option>
+              <option value="full_time">Full Time Jobs</option>
+              <option value="part_time">Part Time Jobs</option>
+              <option value="hybrid">Hybrid Jobs</option>
+              <option value="remote">Remote Jobs</option>
+              <option value="on_site">On Site Jobs</option>
+          </select>
+      </div>
+      <div class="col-md-2 mb-3">
+          <label for="min_salary" class="form-label">Min Salary:</label>
+          <input type="number" class="form-control" id="min_salary" name="min_salary" placeholder="Min Salary">
+      </div>
+      <div class="col-md-2 mb-3">
+          <label for="max_salary" class="form-label">Max Salary:</label>
+          <input type="number" class="form-control" id="max_salary" name="max_salary" placeholder="Max Salary">
+      </div>
+      <div class="col-md-2">
+          <button type="submit" class="btn btn-primary mt-2">Apply Filter</button>
+      </div>
+  </div>
+</form>
+
     </div>
   </section>
 
@@ -82,6 +89,8 @@
 
 
   <section class="section1">
+    <h6>Available Jobs</h6>
+    <h1>Top Jobs</h1>
 
     <?php include('resultPhp.php'); ?>
 

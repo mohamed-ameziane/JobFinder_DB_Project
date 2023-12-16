@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "p1";
+$dbname = "jobfinder";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,12 +13,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch the latest 5 jobs with company details
-$sql = "SELECT jobs_table.job_id, jobs_table.job_name, jobs_table.full_time, jobs_table.salary, jobs_table.posted_time, company.company_name, company.company_picture
+// Fetch the latest 20 jobs with company details, including jobType
+$sql = "SELECT jobs_table.job_id, jobs_table.job_name, jobs_table.full_time, jobs_table.salary, jobs_table.posted_time, jobs_table.jobType, company.company_name, company.company_picture
         FROM jobs_table
         INNER JOIN company ON jobs_table.id_company = company.id_company
         ORDER BY jobs_table.posted_time DESC
-        LIMIT 3";
+        LIMIT 5";
 
 // Execute the query
 $result = $conn->query($sql);
@@ -60,8 +60,8 @@ if ($result->num_rows > 0) {
                     <div class="card-body row">
                         <!-- Left Column for Job Details -->
                         <div class="col-md-7">
-                            <h5 class="card-title">' . $row["job_name"] . '<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
-                            <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
+                            <h5 class="card-title">' . $row["job_name"]  . '     ' .'<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] .' - ' . (isset($row["jobType"]) ? $row["jobType"] : 'N/A') . '</h6> <!-- Update this line with check for "jobType" key -->
                             <!-- Part Time or Full Time Badge -->
                             <p class="card-text">' . $row["salary"] . ' MAD</p>
                         </div>
