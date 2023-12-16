@@ -116,6 +116,23 @@ a.job-card:hover {
   
 }
 
+.section2{
+  margin-top: 100px !important;
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+  margin-bottom: 100px !important;
+  padding-top:45px  !important;
+  padding-bottom: 45px !important;
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+  background-color: rgb(248, 248, 248,0.9)  !important;
+  border-right:rgb(0, 131, 188) solid 4px  !important;
+  border-top:rgb(0, 131, 188) solid 4px  !important;
+  border-radius: 45px !important;
+  
+}
+
+
 .section1 h6{
   color: #cfcfcf;
 }
@@ -147,5 +164,7 @@ a.job-card:hover {
   justify-content: center;
   cursor: pointer;
 }
+
+
 
 

@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "p1";
+$dbname = "jobfinder";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -28,33 +28,50 @@ if ($minSalary == "") {
 if ($maxSalary == "") {
     $maxSalary = $conn->query("SELECT MAX(salary) FROM jobs_table")->fetch_array()[0];
 }
-$sql = "";
-$orderBy = " ORDER BY j.posted_time DESC";
 
-$commonQuery = "SELECT j.*, c.company_name, c.company_picture 
-               FROM jobs_table j
-               INNER JOIN company c ON j.id_company = c.id_company
-               WHERE j.salary BETWEEN $minSalary AND $maxSalary ";
+$sql = "SELECT j.*, c.company_name, c.company_picture 
+        FROM jobs_table j
+        INNER JOIN company c ON j.id_company = c.id_company
+        WHERE j.salary BETWEEN $minSalary AND $maxSalary ";
 
+// Add keyword filter to the query
+if (!empty($keywords)) {
+    $keywordConditions = [];
+    foreach ($keywords as $keyword) {
+        $keywordConditions[] = "(j.job_name LIKE '%$keyword%'
+                               OR j.job_description LIKE '%$keyword%'
+                               OR c.company_name LIKE '%$keyword%')";
+    }
+    $sql .= " AND (" . implode(" OR ", $keywordConditions) . ")";
+}
+
+// Apply additional filters
 if (isset($_GET['filter'])) {
     switch ($_GET['filter']) {
         case "high_salary":
-            $orderBy = " ORDER BY j.salary DESC";
+            $sql .= " ORDER BY j.salary DESC";
             break;
         case "full_time":
-            $commonQuery .= (strpos($commonQuery, 'WHERE') !== false ? " AND " : " WHERE") . " j.full_time = 'Full Time'";
+            $sql .= " AND j.full_time = 'Full Time'";
             break;
         case "part_time":
-            $commonQuery .= (strpos($commonQuery, 'WHERE') !== false ? " AND " : " WHERE") . " j.full_time = 'Part Time'";
+            $sql .= " AND j.full_time = 'Part Time'";
             break;
-
+        case "hybrid":
+            $sql .= " AND j.jobType = 'Hybrid'";
+            break;
+        case "remote":
+            $sql .= " AND j.jobType = 'Remote'";
+            break;
+        case "on_site":
+            $sql .= " AND j.jobType = 'On Site'";
+            break;
     }
 }
 
-$sql = $commonQuery . $orderBy;
+$sql .= " ORDER BY j.posted_time DESC";
+
 $result = $conn->query($sql);
-
-
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -92,8 +109,8 @@ if ($result->num_rows > 0) {
                     <div class="card-body row">
                         <!-- Left Column for Job Details -->
                         <div class="col-md-7">
-                            <h5 class="card-title">' . $row["job_name"] . '<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
-                            <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] . '</h6>
+                            <h5 class="card-title">' . $row["job_name"] . '     ' .'<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] .' - ' . (isset($row["jobType"]) ? $row["jobType"] : 'N/A') . '</h6> <!-- Update this line with check for "jobType" key -->
                             <!-- Part Time or Full Time Badge -->
                             <p class="card-text">' . $row["salary"] . ' MAD</p>
                         </div>
@@ -139,6 +156,5 @@ function buildKeywordFilter($keywords) {
     // Return an empty string if no keywords are provided
     return "";
 }
-
 
 ?>
