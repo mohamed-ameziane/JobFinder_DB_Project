@@ -14,8 +14,6 @@ if ($conn->connect_error) {
 }
 
 // Set default filter
-$filter = isset($_GET['filter']) ? $_GET['filter'] : "new";
-
 // Set default keywords
 $keywords = isset($_GET['keywords']) ? preg_split("/[\s,;]+/", $_GET['keywords']) : [];
 
@@ -24,26 +22,32 @@ $minSalary = isset($_GET['min_salary']) ? $_GET['min_salary'] : 0;
 $maxSalary = isset($_GET['max_salary']) ? $_GET['max_salary'] : PHP_INT_MAX;
 
 $sql = "";
+$orderBy = " ORDER BY j.posted_time DESC"; // Default order
 
 $commonQuery = "SELECT j.*, c.company_name, c.company_picture 
                FROM jobs_table j
                INNER JOIN company c ON j.id_company = c.id_company
-               WHERE j.salary BETWEEN $minSalary AND $maxSalary
-               " . buildKeywordFilter($keywords);
+               WHERE j.salary BETWEEN $minSalary AND $maxSalary";
 
-if ($filter == "high_salary") {
-    $sql = $commonQuery . " ORDER BY j.salary DESC";
-    $result = $conn->query($sql);
-} elseif ($filter == "full_time") {
-    $sql = $commonQuery . " AND j.full_time = 'Full Time'";
-    $result = $conn->query($sql);
-} elseif ($filter == "part_time") {
-    $sql = $commonQuery . " AND j.full_time = 'Part Time'";
-    $result = $conn->query($sql);
-} else {
-    $sql = $commonQuery . " ORDER BY j.posted_time DESC";
-    $result = $conn->query($sql);
+if (isset($_GET['filter'])) {
+    switch ($_GET['filter']) {
+        case "high_salary":
+            $orderBy = " ORDER BY j.salary DESC";
+            break;
+        case "full_time":
+            $commonQuery .= (strpos($commonQuery, 'WHERE') !== false ? " AND" : " WHERE") . " j.full_time = 'Full Time'";
+            break;
+        case "part_time":
+            $commonQuery .= (strpos($commonQuery, 'WHERE') !== false ? " AND" : " WHERE") . " j.full_time = 'Part Time'";
+            break;
+        // Add additional cases as needed
+    }
 }
+
+$sql = $commonQuery . $orderBy;
+$result = $conn->query($sql);
+
+
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -114,15 +118,20 @@ $conn->close();
  * @return string
  */
 function buildKeywordFilter($keywords) {
-    if (empty($keywords)) {
-        return ""; // Return an empty string if no keywords are provided
-    }
-
     $keywordConditions = [];
+
     foreach ($keywords as $keyword) {
         $keywordConditions[] = "j.job_name LIKE '%$keyword%'";
     }
 
-    return " AND (" . implode(" OR ", $keywordConditions) . ")";
+    // Check if any keyword conditions are generated
+    if (!empty($keywordConditions)) {
+        return " AND (" . implode(" OR ", $keywordConditions) . ")";
+    }
+
+    // Return an empty string if no keywords are provided
+    return "";
 }
+
+
 ?>
