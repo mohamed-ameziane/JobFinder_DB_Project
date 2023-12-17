@@ -1,28 +1,27 @@
 <?php
-    include("dbConnect.php");
+include("dbConnect.php");
 
-    // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Retrieve user input
-        $email = $_POST["login-mail"];
-        $password = $_POST["login-password"];
+// Retrieve user input
+$email = $_POST["login-mail"];
+$password = $_POST["login-password"];
 
-        if ($email == ""|| $password == "") {
-            header("Location: login.html");
-            exit();
-        }
+// Prepare and execute the SQL query
+$sql = "SELECT * FROM account WHERE email = '$email' AND password = '$password'";
+$result = $conn->query($sql);
 
-        // Prepare and execute the SQL query
-        $sql = "SELECT * FROM company WHERE contact_email = '$email' AND password = '$password' ";
-        $resultat = $conn->query($sql)->fetch_array();
-        if ($conn->query($sql)->num_rows > 0) {
-            $x = $resultat[0];
-            setcookie("companyData", $x, time() + 3600, "/");
-            header("Location: index.html");
-            exit();
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-            // header("Location: login.html");
-        }
-    }
+if ($result->num_rows > 0) {
+    // Fetch the company ID from the result
+    $row = $result->fetch_assoc();
+    $companyId = $row['id_company'];
+
+    // Set a session variable to store the company ID
+    session_start();
+    $_SESSION['id_company'] = $companyId;
+
+    // Redirect to the company profile page with the company ID
+    header("Location: company_profile.php");
+    exit();
+} else {
+    echo $sql . " error";
+}
 ?>
