@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
 
         // Output the job details as a Bootstrap card
         echo '
-        <a href="jobInformation.html?id=' . $row["job_id"] . '" class="card m-md-5 p-1 job-card">
+        <a href="job_information.php?id=' . $row["job_id"] . '" class="card m-md-5 p-1 job-card">
             <div class="row no-gutters">
                 <!-- Company Picture Column -->
                 <div class="col-md-2 d-flex align-items-center justify-content-center">
