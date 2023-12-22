@@ -129,7 +129,7 @@ if (isset($_GET['id'])) {
                         <p class="card-text"><strong>Posted Date : </strong> <?php echo $elapsedTime; ?></p>
                         <p class="card-text"><strong>Job Type : </strong> <?php echo $jobType; ?></p>
                         <p>
-                            <a href="applyjob.html" class="btn btn-primary btn-lg mt-3">Apply</a>
+                            <a href="apply_job.php?id_job=<?php echo $jobId; ?>" class="btn btn-primary btn-lg mt-3">Apply Now</a>
                         </p>
                     </div>
                 </div>
