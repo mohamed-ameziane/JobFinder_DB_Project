@@ -136,7 +136,7 @@ if (isset($_GET['logout'])) {
         // Display posted jobs
         foreach ($postedJobs as $job) {
             echo '
-            <a href="jobInformation.html?id=' . $job['jobId'] . '" class="card m-md-5 p-1 job-card">
+            <a href="job_information.php?id=' . $job['jobId'] . '" class="card m-md-5 p-1 job-card">
                 <div class="row no-gutters justify-content-center">
                     <div class="col-md-10 text-center mx-auto">
                         <div class="card-body row justify-content-center">
