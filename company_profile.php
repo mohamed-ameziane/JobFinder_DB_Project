@@ -78,7 +78,7 @@ if (isset($_GET['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="company_profileStyle.css">
+    <link rel="stylesheet" href="style/company_profileStyle.css">
     <link rel="icon" type="image/x-icon" href="images/fi1.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -89,17 +89,21 @@ if (isset($_GET['logout'])) {
 <body>
 
 <!-- header -->
-<header>
+  <header>
     <!-- logo -->
-    <div id="logo">
-        <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">JobP <span style="font-size:30px; color: rgb(29, 129, 236);">..</span></h6>
-    </div>
+    <a href="index.html" style="text-decoration: none;">
+      <div id="logo">
+        <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">
+          JobFinder <span style="font-size:30px; color: rgb(29, 129, 236);">...</span>
+        </h6>
+      </div>
+    </a>
 
     <!-- navbar -->
     <nav>
-        <a class="navb" href="index.html">Home</a>
-        <a class="navb" href="about.html">About</a>
-        <a class="navb" href="contactus.html">Contact Us</a>
+      <a class="navb" href="index.html">Home</a>
+      <a class="navb" href="about.html">About</a>
+      <a class="navb" href="contactus.html">Contact Us</a>
     </nav>
 
     <!-- navbar buttons -->
@@ -107,19 +111,19 @@ if (isset($_GET['logout'])) {
         <a href="post_job.html" class="btn btn-primary">Post Job</a>
         <a href="?logout" class="btn btn-outline-danger">Log Out</a>
     </div>
-</header>
+
+  </header>
 
 <!-- company information -->
 <div class="container mt-5">
-    <div class="row mt-4 justify-content-center">
-        <div class="col-md-10 text-center">
-            <!-- Display Company Picture -->
-            <img src="<?php echo $companyPicture; ?>" style="width: 15%;" class="img-fluid rounded" alt="Company Picture">
+<div class="row mt-4">
+        <!-- Column for the Company Picture -->
+        <div class="col-md-5 text-center justify-content-center">
+            <img src="<?php echo $companyPicture; ?>" style="width: 45%;" class="img-fluid rounded" alt="Company Picture">
         </div>
-    </div>
-    <div class="row mt-4 justify-content-center">
-        <div class="col-md-10 text-center border-top">
-            <!-- Display Company Name and other information -->
+        
+        <!-- Column for the Company Information -->
+        <div class="col-md-5 border-right align-self-start">
             <h2><?php echo $companyName; ?></h2>
             <p><strong>Location:</strong> <?php echo $companyLocation; ?></p>
             <p><strong>Website:</strong> <?php echo $companyWebsite; ?></p>
