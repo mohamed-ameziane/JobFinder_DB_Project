@@ -3,8 +3,6 @@
 include("dbConnect.php");
 
 // Set default filter
-// Set default keywords
-$keywords = isset($_GET['keywords']) ? preg_split("/[\s,;]+/", $_GET['keywords']) : [];
 
 // Set default salary range
 $minSalary = isset($_GET['min_salary']) ? $_GET['min_salary'] : 0;
@@ -23,12 +21,14 @@ $sql = "SELECT j.*, c.company_name, c.company_picture
         INNER JOIN company c ON j.id_company = c.id_company
         WHERE j.salary BETWEEN $minSalary AND $maxSalary ";
 
+// Set default keywords
+$keywords = isset($_GET['keywords']) ? preg_split("/[\s,;]+/", $_GET['keywords']) : [];
+
 // Add keyword filter to the query
 if (!empty($keywords)) {
     $keywordConditions = [];
     foreach ($keywords as $keyword) {
         $keywordConditions[] = "(j.job_name LIKE '%$keyword%'
-                               OR j.job_description LIKE '%$keyword%'
                                OR c.company_name LIKE '%$keyword%')";
     }
     $sql .= " AND (" . implode(" OR ", $keywordConditions) . ")";
@@ -88,7 +88,7 @@ if ($result->num_rows > 0) {
 
         // Output the job details as a Bootstrap card
         echo '
-        <a href="jobInformation.html?id=' . $row["job_id"] . '" class="card m-md-5 p-1 job-card">
+        <a href="job_information.php?id=' . $row["job_id"] . '" class="card m-md-5 p-1 job-card">
             <div class="row no-gutters">
                 <!-- Company Picture Column -->
                 <div class="col-md-2 d-flex align-items-center justify-content-center">
