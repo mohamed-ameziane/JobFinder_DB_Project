@@ -85,8 +85,7 @@ INSERT INTO `company` (`id_company`, `company_name`, `company_picture`, `locatio
 (24, 'Jumia', 'images/fi1.png', 'Casablanca, Morocco', 'www.jumia.com', 'Jumia is a website where you can but everything you want.', 'info@jumia.ma'),
 (25, 'Jumia', 'images/fi1.png', 'Casablanca, Morocco', 'https://www.jumia.com/', 'Jumia is a marketplace where you can buy whatever you want.', 'info@jumia.ma'),
 (26, 'Jumia', 'images/fi1.png', 'Casablanca, Morocco', 'https://www.jumia.com/', 'Jumia is a marketplace where you can buy whatever you want.', 'info@jumia.ma'),
-(27, 'Nike inc.', 'images/nike.png', 'Beaverton, Oregon, United States', 'https://www.nike.com/', 'Nike, Inc. is an American athletic footwear and apparel corporation headquartered near Beaverton, Oregon, United States. It is the world\'s largest supplier of athletic shoes and apparel and a major manufacturer of sports equipment, with revenue in excess of US$46 billion in its fiscal year 2022.', 'info@nike.com'),
-(28, 'zwiinn', 'images/nasaa.png', 'dd', 'dd.com', 'ddd', 'ana@zwin.com');
+(27, 'Nike inc.', 'images/nike.png', 'Beaverton, Oregon, United States', 'https://www.nike.com/', 'Nike, Inc. is an American athletic footwear and apparel corporation headquartered near Beaverton, Oregon, United States. It is the world\'s largest supplier of athletic shoes and apparel and a major manufacturer of sports equipment, with revenue in excess of US$46 billion in its fiscal year 2022.', 'info@nike.com');
 
 -- --------------------------------------------------------
 

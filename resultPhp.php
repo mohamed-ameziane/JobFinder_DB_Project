@@ -54,7 +54,7 @@ if (isset($_GET['filter'])) {
             $sql .= (strpos($sql, 'WHERE') !== false ? " AND " : " WHERE") . " j.jobType = 'Remote'";
             break;
         case "on_site":
-            $sql .= (strpos($sql, 'WHERE') !== false ? " AND " : " WHERE") . " j.jobType = 'On Site'";
+            $sql .= (strpos($sql, 'WHERE') !== false ? " AND " : " WHERE") . " j.jobType = 'On-site'";
             break;
     }
 }
@@ -99,7 +99,7 @@ if ($result->num_rows > 0) {
                     <div class="card-body row">
                         <!-- Left Column for Job Details -->
                         <div class="col-md-7">
-                            <h5 class="card-title">' . $row["job_name"] . '     ' .'<span class="badge rounded-pill ' . ($row["full_time"] == "Full Time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
+                            <h5 class="card-title">' . $row["job_name"] . '     ' .'<span class="badge rounded-pill ' . ($row["full_time"] == "Full-time" ? 'bg-success' : 'bg-warning') . '">' . $row["full_time"] . '</span></h5>
                             <h6 class="card-subtitle mb-2 text-muted">' . $row["company_name"] .' - ' . (isset($row["jobType"]) ? $row["jobType"] : 'N/A') . '</h6> <!-- Update this line with check for "jobType" key -->
                             <!-- Part Time or Full Time Badge -->
                             <p class="card-text">' . $row["salary"] . ' MAD</p>
