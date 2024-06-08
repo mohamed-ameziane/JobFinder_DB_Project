@@ -1,6 +1,6 @@
 <?php
 // Include database connection
-include("dbConnect.php"); // Adjust the include path as needed
+include("includes/dbConnect.php"); // Adjust the include path as needed
 
 // Check if job ID is set in the URL
 if (isset($_GET['id'])) {
@@ -77,7 +77,7 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/job_informationStyle.css">
+    <link rel="stylesheet" href="assets/css/job_informationStyle.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -88,7 +88,7 @@ if (isset($_GET['id'])) {
     <!-- header -->
     <header>
         <!-- logo -->
-        <a href="index.html" style="text-decoration: none;">
+        <a href="index.php" style="text-decoration: none;">
         <div id="logo">
             <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">
             JobFinder <span style="font-size:30px; color: rgb(29, 129, 236);">...</span>
@@ -98,15 +98,15 @@ if (isset($_GET['id'])) {
 
         <!-- navbar -->
         <nav>
-        <a class="navb" href="index.html">Home</a>
-        <a class="navb" href="about.html">About</a>
-        <a class="navb" href="contactus.html">Contact Us</a>
+        <a class="navb" href="index.php">Home</a>
+        <a class="navb" href="templates/about.html">About</a>
+        <a class="navb" href="templates/contactus.html">Contact Us</a>
         </nav>
 
         <!-- navbar buttons -->
         <div>
-        <a href="login.html" class="btn btn-primary">Log in</a>
-        <a href="signup.html" class="btn btn-outline-danger">Sign up</a>
+        <a href="templates/login.html" class="btn btn-primary">Log in</a>
+        <a href="templates/signup.html" class="btn btn-outline-danger">Sign up</a>
         </div>
 
     </header>

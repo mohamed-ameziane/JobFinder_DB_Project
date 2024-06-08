@@ -1,5 +1,5 @@
 <?php
-include("dbConnect.php");
+include("includes/dbConnect.php");
 
 // Fetch the latest 5 companies
 $sql = "SELECT DISTINCT company.id_company, company.company_picture

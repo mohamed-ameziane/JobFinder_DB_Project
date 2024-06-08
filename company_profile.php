@@ -1,5 +1,5 @@
 <?php
-include "dbConnect.php";
+include 'includes/dbConnect.php';
 
 // Start the session
 session_start();
@@ -68,7 +68,7 @@ if (isset($_GET['logout'])) {
     session_destroy();
 
     // Redirect to the home page
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 }
 ?>
@@ -78,8 +78,8 @@ if (isset($_GET['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/company_profileStyle.css">
-    <link rel="icon" type="image/x-icon" href="images/fi1.png">
+    <link rel="stylesheet" href="assets/css/company_profileStyle.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/fi1.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -91,7 +91,7 @@ if (isset($_GET['logout'])) {
 <!-- header -->
   <header>
     <!-- logo -->
-    <a href="index.html" style="text-decoration: none;">
+    <a href="index.php" style="text-decoration: none;">
       <div id="logo">
         <h6 style="font-weight: bold; color: black; font-family: Georgia, 'Times New Roman', Times, sans serif; font-size: larger;">
           JobFinder <span style="font-size:30px; color: rgb(29, 129, 236);">...</span>
@@ -101,14 +101,14 @@ if (isset($_GET['logout'])) {
 
     <!-- navbar -->
     <nav>
-      <a class="navb" href="index.html">Home</a>
-      <a class="navb" href="about.html">About</a>
-      <a class="navb" href="contactus.html">Contact Us</a>
+      <a class="navb" href="index.php">Home</a>
+      <a class="navb" href="templates/about.html">About</a>
+      <a class="navb" href="templates/contactus.html">Contact Us</a>
     </nav>
 
     <!-- navbar buttons -->
     <div>
-        <a href="post_job.html" class="btn btn-primary">Post Job</a>
+        <a href="templates/post_job.html" class="btn btn-primary">Post Job</a>
         <a href="?logout" class="btn btn-outline-danger">Log Out</a>
     </div>
 

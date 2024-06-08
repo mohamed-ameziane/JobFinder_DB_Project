@@ -1,5 +1,5 @@
 <?php
-include("dbConnect.php");
+include("includes/dbConnect.php");
 
 // Retrieve user input
 $email = $_POST["login-mail"];

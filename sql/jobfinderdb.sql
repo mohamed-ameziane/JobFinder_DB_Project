@@ -70,16 +70,16 @@ CREATE TABLE `company` (
 --
 
 INSERT INTO `company` (`id_company`, `company_name`, `company_picture`, `location`, `website`, `about_company`, `contact_email`) VALUES
-(14, 'Apple Inc.', 'images/apple.png', 'Cupertino, California', 'https://www.apple.com/', 'Apple Inc. is an American multinational technology company that designs, manufactures, and markets consumer electronics, computer software, and online\r\nservices.', 'info@apple.com'),
-(15, ' Google Inc.', 'images/google.png', 'Mountain View, California', 'https://abc.xyz/', 'Alphabet Inc. is the parent company of Google, involved in various technology related businesses, including internet search, online advertising, and cloud computing.', 'info@google.com'),
-(16, 'Tesla Inc.', 'images/tesla.png', 'Palo Alto, California', 'https://www.tesla.com/', 'Tesla Inc. is an American electric vehicle and clean energy company known for its electric cars, solar energy products, and energy storage solutions.', 'info@tesla.com'),
-(17, ' Facebook, Inc.', 'images/facebook.png', 'Menlo Park, California', 'https://www.facebook.com/', 'Facebook, Inc. is a social media and technology company that focuses on social networking services and products.', 'info@facebook.com'),
-(18, 'IBM (International Business Machines Corporation)', 'images/ibm.png', 'Armonk, New York', 'https://www.ibm.com/', 'IBM is a global technology and consulting company that offers a range of products and services, including hardware, software, and cloud computing.\r\n', 'info@ibm.com'),
-(19, 'Cisco Systems, Inc.', 'images/cisco.png', 'San Jose, California', 'https://www.cisco.com/', 'Cisco Systems, Inc. is a multinational technology conglomerate that designs, manufactures, and sells networking hardware, software, and telecommunications equipment.\r\n', 'info@cisco.com'),
-(20, 'Oracle Corporation', 'images/oracle.png', 'Redwood City, California', 'https://www.oracle.com/', 'Oracle Corporation is a global computer technology corporation specializing in database management systems, cloud services, and enterprise software.\r\n', 'info@oracle.com'),
-(21, 'NASA (National Aeronautics and Space Administration)', 'images/nasa.png', 'Washington, D.C.', 'https://www.nasa.gov/', 'NASA is the United States government agency responsible for the civilian space program, aeronautics research, and aerospace exploration.', 'info@nasa.gov'),
-(22, 'Microsoft', 'images/microsoft.png', 'Redmond, Washington', 'https://www.microsoft.com/', 'Microsoft Corporation is an American multinational technology company that produces, licenses, and sells computer software, consumer electronics', 'info@microsoft.com'),
-(34, 'X inc.', 'images/F1x5VdQX0AA9Sgt.jpeg', 'Mohammedia, Morocco', 'x.com', 'test', 'info@x.com');
+(14, 'Apple Inc.', 'assets/images/apple.png', 'Cupertino, California', 'https://www.apple.com/', 'Apple Inc. is an American multinational technology company that designs, manufactures, and markets consumer electronics, computer software, and online\r\nservices.', 'info@apple.com'),
+(15, ' Google Inc.', 'assets/images/google.png', 'Mountain View, California', 'https://abc.xyz/', 'Alphabet Inc. is the parent company of Google, involved in various technology related businesses, including internet search, online advertising, and cloud computing.', 'info@google.com'),
+(16, 'Tesla Inc.', 'assets/images/tesla.png', 'Palo Alto, California', 'https://www.tesla.com/', 'Tesla Inc. is an American electric vehicle and clean energy company known for its electric cars, solar energy products, and energy storage solutions.', 'info@tesla.com'),
+(17, ' Facebook, Inc.', 'assets/images/facebook.png', 'Menlo Park, California', 'https://www.facebook.com/', 'Facebook, Inc. is a social media and technology company that focuses on social networking services and products.', 'info@facebook.com'),
+(18, 'IBM (International Business Machines Corporation)', 'assets/images/ibm.png', 'Armonk, New York', 'https://www.ibm.com/', 'IBM is a global technology and consulting company that offers a range of products and services, including hardware, software, and cloud computing.\r\n', 'info@ibm.com'),
+(19, 'Cisco Systems, Inc.', 'assets/images/cisco.png', 'San Jose, California', 'https://www.cisco.com/', 'Cisco Systems, Inc. is a multinational technology conglomerate that designs, manufactures, and sells networking hardware, software, and telecommunications equipment.\r\n', 'info@cisco.com'),
+(20, 'Oracle Corporation', 'assets/images/oracle.png', 'Redwood City, California', 'https://www.oracle.com/', 'Oracle Corporation is a global computer technology corporation specializing in database management systems, cloud services, and enterprise software.\r\n', 'info@oracle.com'),
+(21, 'NASA (National Aeronautics and Space Administration)', 'assets/images/nasa.png', 'Washington, D.C.', 'https://www.nasa.gov/', 'NASA is the United States government agency responsible for the civilian space program, aeronautics research, and aerospace exploration.', 'info@nasa.gov'),
+(22, 'Microsoft', 'assets/images/microsoft.png', 'Redmond, Washington', 'https://www.microsoft.com/', 'Microsoft Corporation is an American multinational technology company that produces, licenses, and sells computer software, consumer electronics', 'info@microsoft.com'),
+(34, 'X inc.', 'assets/images/F1x5VdQX0AA9Sgt.jpeg', 'Mohammedia, Morocco', 'x.com', 'test', 'info@x.com');
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,6 @@ CREATE TABLE `job_seeker` (
   `seeker_experience` varchar(50) NOT NULL,
   `seeker_skills` text NOT NULL,
   `seeker_coverletter` text NOT NULL,
-  `seeker_resume_path` varchar(255) NOT NULL,
   `job_id` int(11) DEFAULT NULL,
   `applied_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -150,8 +149,8 @@ CREATE TABLE `job_seeker` (
 -- Dumping data for table `job_seeker`
 --
 
-INSERT INTO `job_seeker` (`id_seeker`, `seeker_mail`, `seeker_name`, `seeker_gender`, `seeker_dob`, `seeker_phone`, `seeker_diplome`, `seeker_experience`, `seeker_skills`, `seeker_coverletter`, `seeker_resume_path`, `job_id`, `applied_at`) VALUES
-(13, 'med.ameez02@gmail.com', 'AMEZIANE Mohamed', 'male', '2002-10-21', '0677777777', 'diploma2', 'experience2', 'test', 'test', 'resume_uploads/CV_AmezianeMohamed.pdf', 2, '2024-01-10 08:33:34');
+INSERT INTO `job_seeker` (`id_seeker`, `seeker_mail`, `seeker_name`, `seeker_gender`, `seeker_dob`, `seeker_phone`, `seeker_diplome`, `seeker_experience`, `seeker_skills`, `seeker_coverletter`, `job_id`, `applied_at`) VALUES
+(13, 'med.ameez02@gmail.com', 'AMEZIANE Mohamed', 'male', '2002-10-21', '0677777777', 'diploma2', 'experience2', 'test', 'test', 2, '2024-01-10 08:33:34');
 
 --
 -- Indexes for dumped tables

@@ -1,5 +1,5 @@
 <?php
-    include("dbConnect.php");
+    include("includes/dbConnect.php");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $conn->real_escape_string($_POST['login-mail']);
@@ -11,7 +11,7 @@
         $contactEmail = $conn->real_escape_string($_POST['contactEmail']);
 
         // Handle company picture upload
-        $companyPicturePath = "images/" . basename($_FILES["companyPicture"]["name"]);
+        $companyPicturePath = "assets/images/" . basename($_FILES["companyPicture"]["name"]);
         move_uploaded_file($_FILES["companyPicture"]["tmp_name"], $companyPicturePath);
 
         // Use a query for checking email existence
@@ -31,7 +31,7 @@
                                     VALUES ('$email', '$password', $companyId)";
 
                 if ($conn->query($insertAccountQuery)) {
-                    header("Location: index.html");
+                    header("Location: index.php");
                 } else {
                     echo "Error inserting into account table: " . $conn->error;
                 }
@@ -42,7 +42,7 @@
             // JavaScript to show a popup
             echo "<script>
                     alert('Account already exists. Please choose a different email.');
-                    window.location.href = 'signup.html';
+                    window.location.href = 'templates/signup.html';
                 </script>";
         }
 

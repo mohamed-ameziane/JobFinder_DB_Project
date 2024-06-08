@@ -1,5 +1,5 @@
 <?php
-include 'dbConnect.php';
+include 'includes/dbConnect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Assuming you have a session variable containing the logged-in user's company ID

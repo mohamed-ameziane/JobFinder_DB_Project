@@ -1,6 +1,6 @@
 <?php
 
-include("dbConnect.php");
+include("includes/dbConnect.php");
 
 // Set default filter
 
